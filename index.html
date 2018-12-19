@@ -192,7 +192,7 @@
     <p id="loading-text">LOADING<span>.</span><span>.</span><span>.</span></p>
   </div>
   <canvas id="canvas" style="opacity: 0"></canvas>
-  <div id="optionsContainer" class="hidden">
+  <div id="optionsContainer" class="hidden-b">
     <div id="collapsible">
       <button id="optionsTrigger" onmouseover="tip('Click to toggle options. Hotkey: O')" class="options icon-right-open glow"></button>
       <button id="regenerate" onmouseover="tip('Click to generate a new map. Hotkey: F6')" class="options">New Map!</button>
@@ -577,7 +577,7 @@
             <button onmouseover="tip('Remove all data and start from scratch')" id="fromScratch">Clear all</button>
             <button class="buttonoff" onmouseover="tip('Finalize the Heightmap. Not allowed if landmass area is insufficient')" id="getMap">Complete</button>
           </div>
-          <div id="customizationMenu" class="hidden">
+          <div id="customizationMenu" class="hidden-b">
             <div id="customizeTools">
               <label onmouseover="tip('Customization Tools')">Tools:</label><br>
               <button onmouseover="tip('Display brushes panel')" id="paintBrushes">Paint Brushes</button>
@@ -670,7 +670,7 @@
       <div id="labelFontButtons" style="display: none">
         <span id="labelExternalFont" onmouseover="tip('Fetch fonts by linking @font-face declaration, just populate with font name if using Google font (fonts.google.com)')" class="icon-plus"></span>
         <select id="labelFontSelect" onmouseover="tip('Select one of the default Fonts')"></select>
-        <input id="labelFontInput" placeholder="link to @font-face" onmouseover="tip('Fetch fonts by linking @font-face declaration')"/ class="hidden">
+        <input id="labelFontInput" placeholder="link to @font-face" onmouseover="tip('Fetch fonts by linking @font-face declaration')" class="hidden-b">
         <i id="labelSizeIcon" class="icon-text-height"></i>
         <input id="labelSize" onmouseover="tip('Change Font size for the label Group')" value="14" type="number" min="1" max="100" step=".5" class="editNumber"/>
       </div>
@@ -678,9 +678,9 @@
       <button id="labelStyleButton" onmouseover="tip('Select text color and opacity for the label Group')" class="icon-brush"></button>
       <div id="labelStyleButtons" style="display: none">
         <input id="labelColor" type="color" class="editColor" value="#3e3e4b">
-        <i id="labelOpacityIcon" class="icon-adjust hidden"></i>
+        <i id="labelOpacityIcon" class="icon-adjust hidden-b"></i>
         <input id="labelOpacity" onmouseover="tip('Change Opacity for the entire Group')" value="1" type="number" min="0" max="1" step="0.02" class="editNumber">
-        <i id="labelShadowIcon" class="icon-clone hidden"></i>
+        <i id="labelShadowIcon" class="icon-clone hidden-b"></i>
         <input id="labelShadow" onmouseover="tip('Change Shadow for the entire Group')" value="1" type="number" min="0" max="1" step="0.02" disabled>
       </div>
 
@@ -996,22 +996,22 @@
         <button id="undo" onmouseover="tip('Undo the latest action (Ctrl + Z)')" class="icon-ccw" disabled></button>
         <button id="redo" onmouseover="tip('Redo the action (Ctrl + Y)')" class="icon-cw" disabled></button>
         <button id="rescaleButton" onmouseover="tip('Show rescaler slider')" class="icon-exchange"></button>
-        <input id="rescaler" onmouseover="tip('Slide to change map height')" type="range" min="1" max="10" step="0.1" value="5" class="hidden">
+        <input id="rescaler" onmouseover="tip('Slide to change map height')" type="range" min="1" max="10" step="0.1" value="5" class="hidden-b">
         <button id="rescaleCondButton" onmouseover="tip('Conditional rescaler')" class="icon-if"></button>
-        <label class="condition hidden">h ≥</label>
-        <input id="rescaleLower" class="condition hidden" onmouseover="tip('Set lower threshold')" value="20" type="number" min="0" max="100">
-        <label class="condition hidden">≤</label>
-        <input id="rescaleHigher" class="condition hidden" onmouseover="tip('Set higher threshold')" value="100" type="number" min="1" max="100">
-        <label class="condition hidden">⇒</label>
-        <select class="condition hidden" id="conditionSign">
+        <label class="condition hidden-b">h ≥</label>
+        <input id="rescaleLower" class="condition hidden-b" onmouseover="tip('Set lower threshold')" value="20" type="number" min="0" max="100">
+        <label class="condition hidden-b">≤</label>
+        <input id="rescaleHigher" class="condition hidden-b" onmouseover="tip('Set higher threshold')" value="100" type="number" min="1" max="100">
+        <label class="condition hidden-b">⇒</label>
+        <select class="condition hidden-b" id="conditionSign">
           <option value="×" selected>×</option>
           <option value="÷">÷</option>
           <option value="+">+</option>
           <option value="-">-</option>
           <option value="^">^</option>
         </select>
-        <input id="rescaleModifier" onmouseover="tip('Set modifier value')" type="number" value="0.9" min="0" max="1.5" step="0.01" class="condition hidden">
-        <button id="rescaleExecute" onmouseover="tip('Run condition')" class="icon-play-circled2 condition hidden"></button>
+        <input id="rescaleModifier" onmouseover="tip('Set modifier value')" type="number" value="0.9" min="0" max="1.5" step="0.01" class="condition hidden-b">
+        <button id="rescaleExecute" onmouseover="tip('Run condition')" class="icon-play-circled2 condition hidden-b"></button>
         <button id="smoothHeights" onmouseover="tip('Smooth all heights')" class="icon-smooth"></button>
         <button id="disruptHeights" onmouseover="tip('Disrupt (randomize) heights')" class="icon-disrupt"></button>
         <button id="brushClear" onmouseover="tip('Clear all height')" class="icon-eraser"></button>
@@ -1026,7 +1026,7 @@
       <div id="countriesHeader">
         <div style="margin-left: 14px" onmouseover="tip('Click to sort alphabetically by country name')" class="sortable alphabetically" data-sortby="country">Country&nbsp;</div>
         <div style="margin-left: 30px" onmouseover="tip('Click to sort alphabetically by capital name')" class="sortable alphabetically" data-sortby="capital">Capital&nbsp;</div>
-        <div style="margin-left: 24px" onmouseover="tip('Click to sort by country expansion value')" class="sortable hidden" data-sortby="expansion">Expan.&nbsp;</div>
+        <div style="margin-left: 24px" onmouseover="tip('Click to sort by country expansion value')" class="sortable hidden-b" data-sortby="expansion">Expan.&nbsp;</div>
         <div style="margin-left: 30px" onmouseover="tip('Click to sort by country cells count')" class="sortable" data-sortby="cells">Cells&nbsp;</div>
         <div style="margin-left: 6px" onmouseover="tip('Click to sort by country burgs count')" class="sortable" data-sortby="burgs">Burgs&nbsp;</div>
         <div style="margin-left: 20px" onmouseover="tip('Click to sort by country area')" class="sortable" data-sortby="area">Area&nbsp;</div>
@@ -1289,7 +1289,7 @@
 
   <div id="tooltip" data-main="Сlick the arrow button to open options">Сlick the arrow button to open options</div>
 
-  <div id="fileInputs" class="hidden">
+  <div id="fileInputs" class="hidden-b">
     <input type="file" accept=".map" id="mapToLoad">
     <input type="file" accept=".txt,.csv" id="burgsListToLoad">
     <input type="file" accept=".txt" id="lagendsToLoad">

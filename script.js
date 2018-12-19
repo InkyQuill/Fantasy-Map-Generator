@@ -208,7 +208,7 @@ function fantasyMap() {
       if (relative < 2) relative = 2;
       el.attr("font-size", relative);
       if (hideLabels.checked) {
-        el.classed("hidden", relative * scale < 6);
+        el.classed("hidden-b", relative * scale < 6);
         updateLabelGroups();
       }
     });
@@ -1664,7 +1664,7 @@ function fantasyMap() {
 
   // draw default scale bar
   function drawScaleBar() {
-    if ($("#scaleBar").hasClass("hidden")) return; // no need to re-draw hidden element
+    if ($("#scaleBar").hasClass("hidden-b")) return; // no need to re-draw hidden element
     svg.select("#scaleBar").remove(); // fully redraw every time
     // get size
     const size = +barSize.value;
@@ -6640,9 +6640,9 @@ function fantasyMap() {
     const defaultStyles = window.getComputedStyle(emptyG);
 
     // show hidden labels but in reduced size
-    clone.select("#labels").selectAll(".hidden").each(function(e) {
+    clone.select("#labels").selectAll(".hidden-b").each(function(e) {
       const size = d3.select(this).attr("font-size");
-      d3.select(this).classed("hidden", false).attr("font-size", rn(size * 0.4, 2));
+      d3.select(this).classed("hidden-b", false).attr("font-size", rn(size * 0.4, 2));
     });
 
     // save group css to style attribute
@@ -6872,12 +6872,13 @@ function fantasyMap() {
 
     // replace old svg
     svg.remove();
+    var mapcontainer = document.getElementById("map-container");
     if (data[0] === "0.52b" || data[0] === "0.53b") {
       states = []; // no states data in old maps
-      document.body.insertAdjacentHTML("afterbegin", data[4]);
+      mapcontainer.insertAdjacentHTML("afterbegin", data[4]);
     } else {
       states = JSON.parse(data[4]);
-      document.body.insertAdjacentHTML("afterbegin", data[5]);
+        mapcontainer.insertAdjacentHTML("afterbegin", data[5]);
     }
 
     svg = d3.select("svg");
@@ -7304,8 +7305,8 @@ function fantasyMap() {
       regions.append("g").attr("id", "temp");
       $("#countriesBottom").children().hide();
       $("#countriesRegenerateButtons").show();
-      $(".statePower, .icon-resize-full, .stateCells, .icon-check-empty").toggleClass("hidden");
-      $("div[data-sortby='expansion'],div[data-sortby='cells']").toggleClass("hidden");
+      $(".statePower, .icon-resize-full, .stateCells, .icon-check-empty").toggleClass("hidden-b");
+      $("div[data-sortby='expansion'],div[data-sortby='cells']").toggleClass("hidden-b");
     }
     if (id === "countriesManuallyComplete") {
       debug.selectAll(".circle").remove();
@@ -7340,8 +7341,8 @@ function fantasyMap() {
       $("#countriesBottom").children().show();
       $("#countriesManuallyButtons, #countriesRegenerateButtons").hide();
       $(".selected").removeClass("selected");
-      $("div[data-sortby='expansion'],.statePower, .icon-resize-full").addClass("hidden");
-      $("div[data-sortby='cells'],.stateCells, .icon-check-empty").removeClass("hidden");
+      $("div[data-sortby='expansion'],.statePower, .icon-resize-full").addClass("hidden-b");
+      $("div[data-sortby='cells'],.stateCells, .icon-check-empty").removeClass("hidden-b");
       customization = 0;
       restoreDefaultEvents();
     }
@@ -7524,7 +7525,7 @@ function fantasyMap() {
       clickToAdd(); // to load on click event function
       $("#addBurg").click().attr("data-state", state);
     }
-    if (id === "toggleScaleBar") {$("#scaleBar").toggleClass("hidden");}
+    if (id === "toggleScaleBar") {$("#scaleBar").toggleClass("hidden-b");}
     if (id === "addRuler") {
       $("#ruler").show();
       const rulerNew = ruler.append("g").attr("class", "linear").call(d3.drag().on("start", elementDrag));
@@ -8480,15 +8481,15 @@ function fantasyMap() {
           el.append('<span onmouseover="tip(\'Country capital. Click to enlange\')" class="icon-star-empty enlange"></span>');
           el.append('<input onmouseover="tip(\'Capital name. Click and type to rename\')" class="stateCapital" value="' + capital + '" autocorrect="off" spellcheck="false"/>');
         }
-        el.append('<span onmouseover="tip(\'Country expansionism (defines competitive size)\')" class="icon-resize-full hidden"></span>');
-        el.append('<input onmouseover="tip(\'Capital expansionism (defines competitive size)\')" class="statePower hidden" type="number" min="0" max="99" step="0.1" value="' + states[s].power + '"/>');
+        el.append('<span onmouseover="tip(\'Country expansionism (defines competitive size)\')" class="icon-resize-full hidden-b"></span>');
+        el.append('<input onmouseover="tip(\'Capital expansionism (defines competitive size)\')" class="statePower hidden-b" type="number" min="0" max="99" step="0.1" value="' + states[s].power + '"/>');
       } else {
         el.append('<input class="stateColor placeholder" disabled type="color"/>');
         el.append('<input onmouseover="tip(\'Neutral burgs are united into this group. Click to change the group name\')" class="stateName italic" id="stateName' + s + '" value="' + states[s].name + '" autocorrect="off" spellcheck="false"/>');
         el.append('<span class="icon-star-empty placeholder"></span>');
         el.append('<input class="stateCapital placeholder"/>');
-        el.append('<span class="icon-resize-full hidden placeholder"></span>');
-        el.append('<input class="statePower hidden placeholder" value="0.0"/>');
+        el.append('<span class="icon-resize-full hidden-b placeholder"></span>');
+        el.append('<input class="statePower hidden-b placeholder" value="0.0"/>');
       }
       el.append('<span onmouseover="tip(\'Cells count\')" class="icon-check-empty"></span>');
       el.append('<div onmouseover="tip(\'Cells count\')" class="stateCells">' + states[s].cells + '</div>');
@@ -8521,11 +8522,11 @@ function fantasyMap() {
     }
     // restore customization Editor version
     if (customization === 3) {
-      $("div[data-sortby='expansion'],.statePower, .icon-resize-full").removeClass("hidden");
-      $("div[data-sortby='cells'],.stateCells, .icon-check-empty").addClass("hidden");
+      $("div[data-sortby='expansion'],.statePower, .icon-resize-full").removeClass("hidden-b");
+      $("div[data-sortby='cells'],.stateCells, .icon-check-empty").addClass("hidden-b");
     } else {
-      $("div[data-sortby='expansion'],.statePower, .icon-resize-full").addClass("hidden");
-      $("div[data-sortby='cells'],.stateCells, .icon-check-empty").removeClass("hidden");
+      $("div[data-sortby='expansion'],.statePower, .icon-resize-full").addClass("hidden-b");
+      $("div[data-sortby='cells'],.stateCells, .icon-check-empty").removeClass("hidden-b");
     }
     // populate total line on footer
     countriesFooterCountries.innerHTML = states.length;
@@ -10022,8 +10023,8 @@ function fantasyMap() {
         // toggle label group on click
         if (hideLabels.checked) hideLabels.click();
         const el = d3.select("#"+this.id);
-        const state = !el.classed("hidden");
-        el.classed("hidden", state);
+        const state = !el.classed("hidden-b");
+        el.classed("hidden-b", state);
         d3.select(this).classed("buttonoff", state);
       });
     });
@@ -10208,14 +10209,14 @@ function fantasyMap() {
       drawScaleBar();
     }
     if (id === "barLabel") {
-      $("#scaleBar").removeClass("hidden");
+      $("#scaleBar").removeClass("hidden-b");
       drawScaleBar();
     }
     if (id === "barBackOpacity" || id === "barBackColor") {
       d3.select("#scaleBar > rect")
         .attr("opacity", +barBackOpacity.value)
         .attr("fill", barBackColor.value);
-      $("#scaleBar").removeClass("hidden");
+      $("#scaleBar").removeClass("hidden-b");
     }
   });
 

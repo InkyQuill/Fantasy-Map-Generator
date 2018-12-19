@@ -884,7 +884,7 @@ div.slider .ui-slider-handle {
 	font-style: italic;
 }
 
-.hidden {
+.hidden-b {
 	display: none;
 }
 
@@ -1044,7 +1044,7 @@ div.states .enlange {
 	cursor: pointer;
 }
 
-#countriesEditor div>.hidden {
+#countriesEditor div>.hidden-b {
 	display: none;
 }
 
